@@ -1,3 +1,3 @@
-# j8unit-parent
+# parent-pom
 
-The Parent POM of the J8Unit Projects.
+The Parent POM of all the J8Unit Projects
