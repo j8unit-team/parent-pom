@@ -23,8 +23,8 @@
   </prerequisites>
 
   <groupId>org.j8unit</groupId>
-  <artifactId>parent</artifactId>
-  <version>1</version>
+  <artifactId>parent-pom</artifactId>
+  <version>2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>J8Unit Project (Parent POM)</name>
@@ -46,17 +46,12 @@
       <email>stefan@gasterstädt.de</email>
       <url>http://stefan.gasterstädt.de</url>
     </developer>
-    <developer>
-      <id>ZAK</id>
-      <name>Sascha Zak</name>
-      <email>sascha.zak@zakdigital.de</email>
-    </developer>
   </developers>
 
   <scm>
-    <connection>scm:git:https://github.com/j8unit-team/j8unit.git</connection>
-    <developerConnection>scm:git:https://j8unit-team@github.com/j8unit-team/j8unit.git</developerConnection>
-    <url>https://github.com/j8unit-team/j8unit.git</url>
+    <connection>scm:git:git@github.com:j8unit-team/parent-pom.git</connection>
+    <developerConnection>scm:git:j8unit-team@github.com:j8unit-team/parent-pom.git</developerConnection>
+    <url>https://github.com/j8unit-team/parent-pom</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -72,22 +67,10 @@
   </distributionManagement>
 
   <properties>
-    <!-- === General Build Data === -->
     <version.java>1.8</version.java>
-    <!-- http://maven.apache.org/general.html#encoding-warning -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-    <!-- === Dependency Versions :: 1st Party (sorted alphabetically for traceability/reproducibility) === -->
-    <version.j8unit.core>4.12.1</version.j8unit.core>
-    <version.j8unit.javadoc>1.0.0</version.j8unit.javadoc>
-    <version.j8unit.repository>1.0.0</version.j8unit.repository>
-    <version.j8unit.showcases>0.0.1-SNAPSHOT</version.j8unit.showcases>
-    <version.j8unit.spring>4.1.7</version.j8unit.spring>
-
-    <!-- === Dependency Versions :: 3rd Party (sorted alphabetically for traceability/reproducibility) === -->
-    <version.junit>4.12</version.junit>
-    <version.spring.platform>1.1.4.RELEASE</version.spring.platform>
+    <version.javadoc.syntaxhighlighter>3.0.90</version.javadoc.syntaxhighlighter>
   </properties>
 
   <profiles>
@@ -109,62 +92,14 @@
     </profile>
   </profiles>
 
-  <dependencyManagement>
-    <dependencies>
-      <!-- === Managed Dependencies :: 1st Party (sorted alphabetically for traceability/reproducibility) === -->
-      <dependency>
-        <groupId>org.j8unit</groupId>
-        <artifactId>core</artifactId>
-        <version>${version.j8unit.core}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.j8unit</groupId>
-        <artifactId>javadoc</artifactId>
-        <version>${version.j8unit.javadoc}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.j8unit</groupId>
-        <artifactId>repository</artifactId>
-        <version>${version.j8unit.repository}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.j8unit</groupId>
-        <artifactId>spring</artifactId>
-        <version>${version.j8unit.spring}</version>
-      </dependency>
-      <!-- === Managed Dependencies :: 3rd Party (sorted alphabetically for traceability/reproducibility) === -->
-      <dependency>
-        <!-- TODO: Could it be sufficient enough to refer to "org.springframework:spring-framework-bom"? -->
-        <groupId>io.spring.platform</groupId>
-        <artifactId>platform-bom</artifactId>
-        <version>${version.spring.platform}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${version.junit}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <build>
     <pluginManagement>
       <plugins>
-        <!-- === Managed Plugins (sorted alphabetically for traceability/reproducibility) === -->
+        <!-- === MAVEN LIFECYCLE: default (sorted alphabetically for traceability/reproducibility) === -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-antrun-plugin</artifactId>
           <version>1.8</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.0.0</version>
-          <configuration>
-            <failOnError>true</failOnError>
-          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -181,6 +116,22 @@
             <showWarnings>true</showWarnings>
             <optimize>true</optimize>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>3.0.0</version>
+          <executions>
+            <execution>
+              <id>analyze</id>
+              <goals>
+                <goal>analyze-only</goal>
+              </goals>
+              <configuration>
+                <failOnWarning>true</failOnWarning>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -227,11 +178,11 @@
           </configuration>
         </plugin>
         <plugin>
-          <!-- In order to disable artifact signing, run "mvn -Dmaven.javadoc.skip=true ..." -->
+          <!-- In order to disable javadoc creation, run "mvn -Dmaven.javadoc.skip=true ..." -->
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>2.10.4</version>
-          <configuration>
+        <configuration>
             <encoding> ${project.build.sourceEncoding}</encoding>
             <docencoding>${project.reporting.outputEncoding}</docencoding>
             <failOnError>true</failOnError>
@@ -276,6 +227,40 @@
               <tag><name>serialData</name></tag>
               <tag><name>see</name></tag>
             </tags>
+          <!-- https://maven.apache.org/plugins/maven-javadoc-plugin/examples/stylesheet-configuration.html -->
+          <!-- <stylesheetfile>stylesheet.css</stylesheetfile> -->
+          <!-- https://maven.apache.org/plugins/maven-javadoc-plugin/examples/javadoc-resources.html -->
+          <!-- <docfilessubdirs>true</docfilessubdirs> -->
+          <!-- Add SyntaxHighlighter (via according JavaDoc resource archive). -->
+          <resourcesArtifacts>
+            <resourcesArtifact>
+              <groupId>de.informaticum</groupId>
+              <artifactId>syntaxhighlighter</artifactId>
+              <version>${version.javadoc.syntaxhighlighter}</version>
+            </resourcesArtifact>
+          </resourcesArtifacts>
+          <!-- Add SyntaxHighlighter features (at the beginning of each JavaDoc HTML file). -->
+          <top><![CDATA[
+            <script src="{@docRoot}/syntaxhighlighter/${version.javadoc.syntaxhighlighter}/scripts/shCore.min.js" type="text/javascript"></script>
+            <script src="{@docRoot}/syntaxhighlighter/${version.javadoc.syntaxhighlighter}/scripts/shBrushJava.js" type="text/javascript"></script>
+            <link href="{@docRoot}/syntaxhighlighter/${version.javadoc.syntaxhighlighter}/styles/shCore.css" rel="stylesheet" type="text/css" title="Style" />
+            <link href="{@docRoot}/syntaxhighlighter/${version.javadoc.syntaxhighlighter}/styles/shThemeDefault.css" rel="stylesheet" type="text/css" title="Style" />
+          ]]>
+          </top>
+          <!-- Activate and customize SyntaxHighlighter features (at the bottom of each JavaDoc HTML file). -->
+          <additionalJOptions>
+            <!-- Due to the last Debian update, "javadoc" became more restrictive: -->
+            <!-- [ERROR] Failed to execute goal org.apache.maven.plugins:maven-javadoc-plugin:2.10.3:jar (attach-javadocs) on project core: MavenReportException: Error while generating Javadoc: -->
+            <!-- [ERROR] Exit code: 1 - javadoc: error - Argument for -footer contains JavaScript. -->
+            <additionalJOption>--allow-script-in-comments</additionalJOption>
+          </additionalJOptions>
+          <footer><![CDATA[
+            <script type="text/javascript">
+              SyntaxHighlighter.defaults["auto-links"] = false;
+              SyntaxHighlighter.defaults["tab-size"] = 2;
+              SyntaxHighlighter.all();
+            </script>
+          ]]></footer>
           </configuration>
           <executions>
             <execution>
@@ -290,11 +275,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.5.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -313,7 +293,7 @@
           </executions>
         </plugin>
         <plugin>
-          <!-- In order to disable artifact signing, run "mvn -DskipTests=true ..." -->
+          <!-- In order to disable tests execution, run "mvn -DskipTests=true ..." -->
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.19.1</version>
@@ -322,6 +302,21 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>
           <version>1.12</version>
+        </plugin>
+        <!-- MAVEN LIFECYCLE: clean (sorted alphabetically for traceability/reproducibility) -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+          <configuration>
+            <failOnError>true</failOnError>
+          </configuration>
+        </plugin>
+        <!-- MAVEN LIFECYCLE: site (sorted alphabetically for traceability/reproducibility) -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.5.1</version>
         </plugin>
       </plugins>
     </pluginManagement>
