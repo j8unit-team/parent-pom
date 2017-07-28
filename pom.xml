@@ -94,10 +94,16 @@
 
   <build>
     <pluginManagement>
+      <!-- Plug-ins are sorted alphabetically for traceability/reproducibility. -->
       <plugins>
-        <!-- ========================================================================================= -->
-        <!-- === MAVEN LIFECYCLE: default (sorted alphabetically for traceability/reproducibility) === -->
-        <!-- ========================================================================================= -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+          <configuration>
+            <failOnError>true</failOnError>
+          </configuration>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -333,6 +339,11 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.6</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-source-plugin</artifactId>
           <version>3.0.1</version>
           <executions>
@@ -363,25 +374,6 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>
           <version>3.0.0</version>
-        </plugin>
-        <!-- ======================================================================================= -->
-        <!-- === MAVEN LIFECYCLE: clean (sorted alphabetically for traceability/reproducibility) === -->
-        <!-- ======================================================================================= -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.0.0</version>
-          <configuration>
-            <failOnError>true</failOnError>
-          </configuration>
-        </plugin>
-        <!-- ====================================================================================== -->
-        <!-- === MAVEN LIFECYCLE: site (sorted alphabetically for traceability/reproducibility) === -->
-        <!-- ====================================================================================== -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.6</version>
         </plugin>
       </plugins>
     </pluginManagement>
