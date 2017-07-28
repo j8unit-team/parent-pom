@@ -30,7 +30,7 @@
 
   <name>J8Unit Project (Parent POM)</name>
   <description>The Parent POM of all the J8Unit Projects.</description>
-  <url>https://github.com/j8unit-team/j8unit</url>
+  <url>https://github.com/j8unit-team/parent-pom</url>
 
   <licenses>
     <license>
