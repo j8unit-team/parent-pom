@@ -79,6 +79,9 @@
       <id>gpg-signing</id>
       <activation>
         <property>
+          <!-- If this property is given, it obviously is intended to be used by the GPG plug-in. Thus, we use its
+               existence to automatically activate that plug-in without the need of any further verbosity (e.g.,
+               specifying a profile). -->
           <name>gpg.keyname</name>
         </property>
       </activation>
