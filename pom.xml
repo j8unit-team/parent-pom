@@ -136,6 +136,23 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
+          <configuration>
+            <deployAtEnd>true</deployAtEnd>
+            <!--
+             ! In case of a release deployment you definitively should enable the "updateReleaseInfo" parameter in order
+             ! to cause the according metadata update (making the artifact a release version). 
+             !  + http://maven.apache.org/plugins/maven-deploy-plugin/deploy-mojo.html#updateReleaseInfo
+             !  + https://support.sonatype.com/hc/en-us/articles/213464638-Why-are-the-latest-and-release-tags-in-maven-metadata-xml-not-being-updated-after-deploying-artifacts-
+             !
+             ! Activation can be done (a) by an additional user-defined profile, (b) by reusing the existing
+             ! "release-profile" of the super-POM, or (c) by setting the parameter via maven execution with
+             ! "-DupdateReleaseInfo=true".
+             !  + http://maven.apache.org/ref/3-LATEST/maven-model-builder/super-pom.html
+             ! Since the same parameter is used by maven-install-plugin too, version (c) should be preferred.
+             !  + http://maven.apache.org/plugins/maven-install-plugin/install-mojo.html#updateReleaseInfo
+             !  + http://maven.apache.org/plugins/maven-install-plugin/examples/update-release-info.html
+             !-->
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -197,6 +214,10 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.5.2</version>
+          <configuration>
+            <createChecksum>true</createChecksum>
+            <installAtEnd>true</installAtEnd>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
