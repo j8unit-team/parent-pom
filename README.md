@@ -1,3 +1,6 @@
-# parent-pom
+# J8Unit :: Maven Parent POM
 
-The Parent POM of all the J8Unit Projects
+This is the parent POM of all the J8Unit Projects.
+
+Mainly, it is managing all the build plug-ins.
+Any further detail can be found within the comments placed immediate within the `pom.xml` file.
