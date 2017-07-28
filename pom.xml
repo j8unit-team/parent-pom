@@ -263,6 +263,7 @@
             <links>
               <link>http://junit.org/junit4/javadoc/latest/</link>
             </links>
+            <!-- http://docs.oracle.com/javase/8/docs/technotes/tools/unix/javadoc.html#BEJEFABE -->
             <!-- http://blog.joda.org/2014/02/turning-off-doclint-in-jdk-8-javadoc.html -->
             <additionalparam>-Xdoclint:none</additionalparam>
             <!-- https://maven.apache.org/plugins/maven-javadoc-plugin/examples/stylesheet-configuration.html -->
