@@ -2,22 +2,40 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <!--
-    ~ An "Introduction to the POM" can be read here:
-    ~ + https://maven.apache.org/guides/introduction/introduction-to-the-pom.html 
-    ~
-    ~ The "POM Reference" is here:
-    ~ + http://maven.apache.org/pom.html
-    ~
-    ~ One of the points to emphasise is the differentiation between inheritance and aggregation.
-    ~ A single POM can be (and often is) both a super POM and an aggregation POM:
-    ~ + http://maven.apache.org/pom.html#Inheritance 
-    ~ + http://maven.apache.org/pom.html#Aggregation_or_Multi-Module
-    ~
-    ~ In the current case, the J8Unit parent POM is made for inheritance (managing all the Plug-Ins).
-  -->
-
   <modelVersion>4.0.0</modelVersion>
+
+  <!--
+   ! An "Introduction to the POM" can be read here:
+   !  + https://maven.apache.org/guides/introduction/introduction-to-the-pom.html 
+   !
+   ! The "POM Reference" is here:
+   !  + http://maven.apache.org/pom.html
+   !
+   ! One of the points to emphasise is the differentiation between inheritance and aggregation.
+   ! A single POM can be (and often is) both a super-POM and an aggregation-POM:
+   !  + http://maven.apache.org/pom.html#Inheritance 
+   !  + http://maven.apache.org/pom.html#Aggregation_or_Multi-Module
+   !
+   ! In the current case, the J8Unit parent POM is made for inheritance. And, mainly, it is managing all the build
+   ! plug-ins. In detail, these plug-ins are
+   !  + any plug-in defaultly bound by Maven's "clean" lifecycle,
+   !    - http://maven.apache.org/ref/3-LATEST/maven-core/lifecycles.html#clean_Lifecycle
+   !  + any plug-in defaultly bound by Maven's "pom" packaging,
+   !    - http://maven.apache.org/ref/3-LATEST/maven-core/default-bindings.html#Plugin_bindings_for_pom_packaging
+   !  + any plug-in defaultly bound by Maven's "jar" packaging,
+   !    - http://maven.apache.org/ref/3-LATEST/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging
+   !  + maven-source-plugin, maven-javadoc-plugin
+   !  + any plug-in defaultly bound by Maven's "site" lifecycle,
+   !    - http://maven.apache.org/ref/3-LATEST/maven-core/lifecycles.html#site_Lifecycle
+   !  + further plug-ins to improve code quality,
+   !  + further plug-ins required for maven-central/sonatype distributions (e.g. maven-gpg-plugin).
+   !
+   ! Further, due to the absence of an explicit parent-POM, this project implicitly inherits from the apache's
+   ! super-POM. The specific super-POM comes along with your locally installed Maven - which, indeed, must be version
+   ! 3.0 at least (as specified by the maven-enforcer-plugin below). Each of the super-POMs can be found at the Apache
+   ! Maven Project's website; The URL of the latest Maven 3 super-POM is:
+   !  + http://maven.apache.org/ref/3-LATEST/maven-model-builder/super-pom.html 
+   !-->
 
   <groupId>org.j8unit</groupId>
   <artifactId>parent-pom</artifactId>
