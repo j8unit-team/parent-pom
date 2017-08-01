@@ -193,7 +193,7 @@
               <configuration>
                 <!-- TODO: Check https://maven.apache.org/enforcer/enforcer-rules/index.html for further rules. -->
                 <rules>
-                  <dependencyConvergence/>
+                  <dependencyConvergence />
                   <!-- https://maven.apache.org/enforcer/enforcer-rules/requireMavenVersion.html -->
                   <!-- https://maven.apache.org/enforcer/maven-enforcer-plugin/faq.html -->
                   <requireMavenVersion>
