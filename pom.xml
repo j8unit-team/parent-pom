@@ -39,7 +39,7 @@
 
   <groupId>org.j8unit</groupId>
   <artifactId>parent-pom</artifactId>
-  <version>2-SNAPSHOT</version>
+  <version>3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>J8Unit Project (Parent POM)</name>
